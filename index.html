@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake Coin Mining</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+    }
+
+    h1 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #333;
+    }
+
+    p {
+        margin-bottom: 20px;
+        color: #666;
+    }
+
+    button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #fakeCoins {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    #console {
+        text-align: left;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: #f9f9f9;
+    }
+
+    .arrow {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        display: inline-block;
+    }
+
+    .green {
+        border-bottom: 8px solid #4CAF50;
+    }
+
+    .red {
+        border-top: 8px solid #F44336;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fake Coin Mining Simulation</h1>
+        <p>Click the mine button to mine fake coins:</p>
+        <button id="mineButton">Mine</button>
+        <p id="fakeCoins">Total Fake Coins Mined: 0</p>
+        <div id="statistics"></div>
+        <div id="console"></div>
+    </div>
+
+    <script>
+        let totalCoins = 0;
+        let positiveTrend = true;
+
+        function mineCoins() {
+            const minedCoins = Math.floor(Math.random() * 21) - 10; // Generate a random number of coins (-10 to 10)
+            totalCoins += minedCoins;
+            document.getElementById('fakeCoins').innerText = `Total Fake Coins Mined: ${totalCoins}`;
+            logToConsole(`Mined ${minedCoins > 0 ? '+' : ''}${minedCoins} fake coins.`);
+            updateStatistics(minedCoins);
+        }
+
+        function logToConsole(message) {
+            const consoleElement = document.getElementById('console');
+            const p = document.createElement('p');
+            p.textContent = message;
+            consoleElement.appendChild(p);
+            consoleElement.scrollTop = consoleElement.scrollHeight;
+        }
+
+        function updateStatistics(coins) {
+            const statisticsElement = document.getElementById('statistics');
+            statisticsElement.innerHTML = `<p>Statistics: ${coins > 0 ? '<span class="arrow green"></span>' : '<span class="arrow red"></span>'}</p>`;
+        }
+
+        document.getElementById('mineButton').addEventListener('click', mineCoins);
+    </script>
+</body>
+</html>
